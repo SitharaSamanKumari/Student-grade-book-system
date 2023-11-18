@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="535.0" prefWidth="484.0" AnchorPane.topAnchor="30.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inovaItSys.app.HomeViewController">
+   <children>
+      <Label alignment="CENTER" layoutX="129.0" prefHeight="70.0" prefWidth="527.0" style="-fx-background-color: lightgreen;" text="STUDENT GRADEBOOK" textFill="#387244" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Ubuntu Condensed" size="38.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="511.0" prefHeight="26.0" prefWidth="527.0" text="Copyright 2023 AMSSK. All Right Reserved." AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="182.0" layoutY="107.0" prefHeight="200.0" prefWidth="100.0" spacing="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fx:id="imvAddStudent" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/add-student.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imvAddSubject" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/folder_full_add_12974.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imvTranscript" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Generate-transcript.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
