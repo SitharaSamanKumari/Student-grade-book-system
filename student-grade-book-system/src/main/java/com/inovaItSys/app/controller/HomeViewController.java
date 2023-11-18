@@ -1,4 +1,4 @@
-package com.inovaItSys.app;
+package com.inovaItSys.app.controller;
 
 import javafx.scene.image.ImageView;
 

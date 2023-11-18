@@ -1,4 +1,4 @@
-package com.inovaItSys.app;
+package com.inovaItSys.app.controller;
 
 public class SubjectViewController {
 }

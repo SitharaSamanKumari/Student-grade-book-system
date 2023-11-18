@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="735.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inovaItSys.app.HomeViewController">
+<AnchorPane prefHeight="735.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inovaItSys.app.controller.HomeViewController">
    <children>
       <Label alignment="CENTER" layoutX="129.0" prefHeight="70.0" prefWidth="527.0" style="-fx-background-color: lightgreen;" text="STUDENT GRADEBOOK" textFill="#387244" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
