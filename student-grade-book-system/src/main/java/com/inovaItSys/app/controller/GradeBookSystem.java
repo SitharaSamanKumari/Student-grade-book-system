@@ -1,9 +1,13 @@
 package com.inovaItSys.app.controller;
 
+import com.inovaItSys.app.to.Subject;
+
+import java.sql.SQLException;
+
 public abstract class GradeBookSystem {
-    void addNewStudent() {
+    public void addNewStudent(Subject subject) throws SQLException {
     }
-    void deleteStudent() {
+    public void deleteSubject(String code) throws SQLException {
     }
 
     void addNewSubject() {
