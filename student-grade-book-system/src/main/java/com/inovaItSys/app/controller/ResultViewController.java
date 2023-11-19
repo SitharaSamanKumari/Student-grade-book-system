@@ -25,7 +25,7 @@ public class ResultViewController   {
             tblResult.getColumns().get(i).setCellValueFactory(new PropertyValueFactory<>(columns[i]));
         }
 
-        
+
     }
     public void cmbIdOnAction(ActionEvent actionEvent) {
 

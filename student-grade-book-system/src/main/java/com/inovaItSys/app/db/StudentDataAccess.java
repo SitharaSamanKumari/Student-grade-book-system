@@ -56,7 +56,7 @@ public class StudentDataAccess {
 
     }
     /*Get all enrolled data for a student*/
-    public static void getEnrolledSubjects(String id) throws SQLException {
+    public static List<Subject> getEnrolledSubjects(String id) throws SQLException {
         STM_GET_ENROLL_SUBJECTS.setString(1,id);
         ResultSet rst = STM_GET_ENROLL_SUBJECTS.executeQuery();
         List<Subject> enrollSubject = new ArrayList<>();
@@ -66,6 +66,19 @@ public class StudentDataAccess {
             double gpa = rst.getDouble("gpa");
             enrollSubject.add(new Subject(code,subjectName,gpa));
         }
+        return enrollSubject;
+    }
+
+    public static List<Student> getAllStudent() throws SQLException {
+        List<Student> studentList = new ArrayList<>();
+        ResultSet rst = STM_GET_ALL_STUDENT.executeQuery();
+        while (rst.next()){
+            String id = rst.getString("id");
+            String firstName = rst.getString("first_name");
+            String lastName = rst.getString("last_name");
+            studentList.add(new Student(id,firstName,lastName));
+        }
+    return studentList;
     }
 
     }
