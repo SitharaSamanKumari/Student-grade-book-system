@@ -1,4 +1,5 @@
 package com.inovaItSys.app.controller;
 
-public class StudentViewController {
+public class StudentViewController extends GradeBookSystem {
+
 }
