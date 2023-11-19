@@ -2,7 +2,7 @@ package com.inovaItSys.app.db;
 
 //import com.inovaItSys.app.to.GradesList;
 
-import com.inovaItSys.app.to.Grade;
+import com.inovaItSys.app.tm.Grade;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

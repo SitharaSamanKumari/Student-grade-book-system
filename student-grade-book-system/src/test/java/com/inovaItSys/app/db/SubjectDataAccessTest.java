@@ -1,12 +1,10 @@
 package com.inovaItSys.app.db;
 
-import com.inovaItSys.app.to.Subject;
+import com.inovaItSys.app.tm.Subject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;

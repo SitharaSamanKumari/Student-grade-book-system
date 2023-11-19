@@ -1,6 +1,6 @@
 package com.inovaItSys.app.db;
 
-import com.inovaItSys.app.to.Subject;
+import com.inovaItSys.app.tm.Subject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,7 +1,6 @@
 package com.inovaItSys.app.db;
 
-import com.inovaItSys.app.to.Grade;
-import com.inovaItSys.app.to.Subject;
+import com.inovaItSys.app.tm.Grade;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

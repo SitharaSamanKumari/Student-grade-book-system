@@ -24,11 +24,11 @@ class SingleDatabaseConnectionTest {
         assertEquals(instance2, instance3);
     }
 
-//    @Test
-//    void generateSchema() {
-//        assertDoesNotThrow(()->{
-//            SingleDatabaseConnection.getInstance().getConnection().createStatement()
-//                    .executeQuery("SELECT * FROM subject,  grade") ;
-//        });
-//    }
+    @Test
+    void generateSchema() {
+        assertDoesNotThrow(()->{
+            SingleDatabaseConnection.getInstance().getConnection().createStatement()
+                    .executeQuery("SELECT * FROM subject,  grade") ;
+        });
+    }
 }

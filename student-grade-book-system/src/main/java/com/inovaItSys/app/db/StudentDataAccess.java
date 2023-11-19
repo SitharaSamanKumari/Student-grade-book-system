@@ -1,7 +1,7 @@
 package com.inovaItSys.app.db;
 
-import com.inovaItSys.app.to.Student;
-import com.inovaItSys.app.to.Subject;
+import com.inovaItSys.app.tm.Student;
+import com.inovaItSys.app.tm.Subject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,13 +14,16 @@ public class StudentDataAccess {
     private static final PreparedStatement STM_STUDENT_INSERT;
     private static final PreparedStatement STM_ENROLL_SUBJECT_INSERT;
     private static final PreparedStatement STM_GET_ALL_STUDENT;
+    private static final PreparedStatement STM_GET_ENROLL_SUBJECTS;
     static {
         try {
             Connection connection = SingleDatabaseConnection.getInstance().getConnection();
             STM_STUDENT_INSERT = connection.prepareStatement("INSERT INTO student(id, first_name, last_name) VALUES (?,?,?)");
             STM_ENROLL_SUBJECT_INSERT = connection.prepareStatement("INSERT INTO subject_enroll(student_id, subject_code) VALUES (?,?)");
             STM_GET_ALL_STUDENT = connection.prepareStatement("SELECT * FROM student ORDER BY id ");
-
+            STM_GET_ENROLL_SUBJECTS = connection.prepareStatement("SELECT code,subject_name,gpa FROM\n" +
+                    "                                 (SELECT * FROM subject INNER JOIN subject_enroll ON code = subject_code) as es \n" +
+                    "                             WHERE student_id='1';\n");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -41,6 +44,8 @@ public class StudentDataAccess {
                 STM_ENROLL_SUBJECT_INSERT.setString(2,subject.getCode());
                 STM_ENROLL_SUBJECT_INSERT.executeUpdate();
             }
+
+
             SingleDatabaseConnection.getInstance().getConnection().commit();
         }catch (Exception e){
             SingleDatabaseConnection.getInstance().getConnection().rollback();
@@ -49,6 +54,18 @@ public class StudentDataAccess {
             SingleDatabaseConnection.getInstance().getConnection().setAutoCommit(true);
         }
 
+    }
+    /*Get all enrolled data for a student*/
+    public static void getEnrolledSubjects(String id) throws SQLException {
+        STM_GET_ENROLL_SUBJECTS.setString(1,id);
+        ResultSet rst = STM_GET_ENROLL_SUBJECTS.executeQuery();
+        List<Subject> enrollSubject = new ArrayList<>();
+        while (rst.next()){
+            String code = rst.getString("code");
+            String subjectName = rst.getString("subject_name");
+            double gpa = rst.getDouble("gpa");
+            enrollSubject.add(new Subject(code,subjectName,gpa));
+        }
     }
 
     }

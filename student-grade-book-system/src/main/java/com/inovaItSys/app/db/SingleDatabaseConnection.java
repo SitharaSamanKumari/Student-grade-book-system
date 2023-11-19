@@ -34,13 +34,13 @@ public class SingleDatabaseConnection {
         return (instance == null) ? (instance = new SingleDatabaseConnection()) : instance;
     }
 
-//    private void generateSchema() throws Exception {
-//        URL url = getClass().getResource("/schema.sql");
-//        Path path = Paths.get(url.toURI());
-//        String dbScript = Files.readAllLines(path).stream()
-//                .reduce((prevLine, currentLine) -> prevLine + currentLine).get();
-//        connection.createStatement().execute(dbScript);
-//    }
+    private void generateSchema() throws Exception {
+        URL url = getClass().getResource("/schema.sql");
+        Path path = Paths.get(url.toURI());
+        String dbScript = Files.readAllLines(path).stream()
+                .reduce((prevLine, currentLine) -> prevLine + currentLine).get();
+        connection.createStatement().execute(dbScript);
+    }
 
     public Connection getConnection() {
         return connection;
