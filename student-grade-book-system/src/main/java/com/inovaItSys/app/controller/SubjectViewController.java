@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.sql.SQLException;
 
-public class SubjectViewController extends GradeBookSystem {
+public class SubjectViewController   {
     public TextField txtCode;
     public TextField txtSubjectName;
     public TextField txtGpa;

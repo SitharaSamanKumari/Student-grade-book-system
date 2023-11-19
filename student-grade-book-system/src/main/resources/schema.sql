@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS subject
 
 CREATE TABLE IF NOT EXISTS grade
 (
-    grade      VARCHAR(1) PRIMARY KEY,
+    grade      VARCHAR(5) PRIMARY KEY,
     upper_mark INT NOT NULL,
     lower_mark INT NOT NULL
 );
@@ -20,3 +20,4 @@ CREATE TABLE student
     subject_code VARCHAR(20),
     CONSTRAINT student_fk FOREIGN KEY (subject_code) REFERENCES subject (code) ON DELETE CASCADE
 );
+

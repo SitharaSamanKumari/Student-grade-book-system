@@ -1,6 +1,5 @@
 package com.inovaItSys.app.db;
 
-import com.inovaItSys.app.controller.GradeBookSystem;
 import com.inovaItSys.app.to.Subject;
 
 import java.sql.Connection;
