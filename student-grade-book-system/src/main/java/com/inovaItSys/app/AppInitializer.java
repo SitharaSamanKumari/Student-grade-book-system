@@ -21,7 +21,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/HomeView.fxml"));
+        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/SubjectView.fxml"));
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Student GradeBook");
