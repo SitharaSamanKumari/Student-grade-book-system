@@ -12,4 +12,8 @@ public class Subject {
     private String code;
     private String subjectName;
     private double  gpa;
+    @Override
+    public String toString() {
+        return subjectName;
+    }
 }

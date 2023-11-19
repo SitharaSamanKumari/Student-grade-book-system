@@ -39,7 +39,7 @@ public class StudentDataAccess {
             for (Subject subject : subjectList) {
                 STM_ENROLL_SUBJECT_INSERT.setString(1,student.getId());
                 STM_ENROLL_SUBJECT_INSERT.setString(2,subject.getCode());
-                STM_STUDENT_INSERT.executeUpdate();
+                STM_ENROLL_SUBJECT_INSERT.executeUpdate();
             }
             SingleDatabaseConnection.getInstance().getConnection().commit();
         }catch (Exception e){

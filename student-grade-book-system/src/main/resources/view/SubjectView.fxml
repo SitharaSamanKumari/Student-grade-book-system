@@ -55,11 +55,11 @@
          </padding>
       </Button>
       <TableView fx:id="tblSubject" layoutX="50.0" layoutY="363.0" prefHeight="297.0" prefWidth="580.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
-        <columns>
-          <TableColumn prefWidth="117.0" text="CODE" />
-          <TableColumn prefWidth="348.0" text="NAME" />
+         <columns>
+            <TableColumn prefWidth="117.0" text="CODE" />
+            <TableColumn prefWidth="348.0" text="NAME" />
             <TableColumn prefWidth="128.0" text="GPA" />
-        </columns>
+         </columns>
       </TableView>
       <Label layoutX="30.0" layoutY="103.0" prefHeight="26.0" prefWidth="324.0" text="CREATE SUBJECT" textFill="#1c322e" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="320.0">
          <font>
