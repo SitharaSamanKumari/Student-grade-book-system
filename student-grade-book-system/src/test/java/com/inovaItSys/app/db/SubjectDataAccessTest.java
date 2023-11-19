@@ -25,7 +25,7 @@ class SubjectDataAccessTest {
     }
 
     @Test
-    void addNewStudent() throws SQLException {
+    void addNewSubject() throws SQLException {
         assertDoesNotThrow(()->{
             SubjectDataAccess.addNewSubject(new Subject("S001", "Maths", 1.5));
             SubjectDataAccess.addNewSubject(new Subject("S002", "Sinhala", 4));
