@@ -1,5 +1,6 @@
 package com.inovaItSys.app.controller;
 
+import com.inovaItSys.app.db.GradeDataAccess;
 import com.inovaItSys.app.db.StudentDataAccess;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,19 +49,24 @@ public class ResultViewController   {
                 TextField mark = new TextField();
                 Label displayGrade = new Label();
                 Result result = new Result(enrollSubject.getCode(), enrollSubject.getSubjectName(), enrollSubject.getGpa(),mark,displayGrade);
+                table.add(result);
                 mark.textProperty().addListener((e)->{
-                    if (mark.getText()!=null){
-                        double subjectMark = Double.valueOf(mark.getText().strip());
-
+                    try {
+                        displayGrade.setText(markValidation(mark.getText().strip()));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
                 });
-                table.add(result);
-
-
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String markValidation(String mark) throws SQLException {
+        if(mark.strip().isBlank() || !mark.strip().matches("^\\d{1,3}([.]\\d{1,2})?$") ||(Double.valueOf(mark)>100.0)){
+            return "Invalid result!";
+        }
+        return GradeDataAccess.getResultGrade(Double.valueOf(mark));
     }
 }

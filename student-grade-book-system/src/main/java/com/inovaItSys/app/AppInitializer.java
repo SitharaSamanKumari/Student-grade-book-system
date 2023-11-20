@@ -18,14 +18,16 @@ import java.util.List;
 public class AppInitializer extends Application {
 
     public static void main(String[] args) throws SQLException {
-
-        Connection connection = SingleDatabaseConnection.getInstance().getConnection();
-        launch(args);
+        try(Connection connection = SingleDatabaseConnection.getInstance().getConnection();){
+            launch(args);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException, SQLException {
-        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/HomeView.fxml"));
+        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/ResultView.fxml"));
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Student GradeBook");

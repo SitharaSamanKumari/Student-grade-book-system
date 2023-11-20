@@ -24,14 +24,11 @@ public class SubjectViewController   {
     public Button btnBack;
     public void initialize() {
         tblSubject.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
-//        tblCustomers.getColumns().get(0).setStyle("-fx-alignment: center;");
         tblSubject.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
         tblSubject.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("gpa"));
 
         tblSubject.setEditable(false);
-//        btnDelete.setDisable(true);
         btnSave.setDefaultButton(true);
-//        btnAddNew.fire();
         try {
             tblSubject.getItems().addAll(SubjectDataAccess.getAllSubjects());
         } catch (SQLException e) {
@@ -40,8 +37,6 @@ public class SubjectViewController   {
         }
         tblSubject.getSelectionModel().selectedItemProperty().addListener((ov, prev, cur) ->{
             if (cur != null){
-//                btnSave.setText("UPDATE");
-//                btnDelete.setDisable(false);
                 txtCode.setText(cur.getCode());
                 txtSubjectName.setText(cur.getSubjectName());
                 txtGpa.setText(String.format("%s",cur.getGpa()));
@@ -54,6 +49,7 @@ public class SubjectViewController   {
     }
 
     public void SaveKeyPressedOnAction(KeyEvent keyEvent) {
+        //Todo
 
     }
 
@@ -63,7 +59,6 @@ public class SubjectViewController   {
         Subject subject = new Subject(txtCode.getText(),
                 txtSubjectName.getText().strip(), Double.valueOf(txtGpa.getText().strip()));
         try {
-//            if (btnSave.getText().equals("SAVE")){
                 SubjectDataAccess.addNewSubject(subject);
                 tblSubject.getItems().add(subject);
                 btnNewSubject.fire();
@@ -72,16 +67,10 @@ public class SubjectViewController   {
                 new Alert(Alert.AlertType.ERROR, "Failed to save the subject, try again").show();
                 ex.printStackTrace();
             }
-//        else{
-//                CustomerDataAccess.updateCustomer(customer);
-//                ObservableList<Customer> customerList = tblCustomers.getItems();
-//                Customer selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
-//                customerList.set(customerList.indexOf(selectedCustomer), customer);
-//                tblCustomers.refresh();
-//            }
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        //Todo
     }
 
     public void btnNewSubjectOnAction(ActionEvent actionEvent) {
@@ -92,7 +81,7 @@ public class SubjectViewController   {
     }
 
     public void btnBackOnAction(ActionEvent actionEvent) {
-
+        //Todo
     }
     private boolean isDataValid() {
         String code = txtCode.getText().strip();
