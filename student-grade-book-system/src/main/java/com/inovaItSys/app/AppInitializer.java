@@ -25,7 +25,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException, SQLException {
-        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/ResultView.fxml"));
+        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/HomeView.fxml"));
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Student GradeBook");

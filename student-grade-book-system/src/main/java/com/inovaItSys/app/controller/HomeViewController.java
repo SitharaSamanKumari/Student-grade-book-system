@@ -3,12 +3,12 @@ package com.inovaItSys.app.controller;
 import com.inovaItSys.app.db.GradeDataAccess;
 import com.inovaItSys.app.tm.Grade;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeViewController {
     public void initialize(){
-        /*Get database Connection When App Launch*/
         List<Grade> gradelist = new ArrayList<>(){};
         gradelist.add(new Grade("A+", 100, 85, 4.2));
         gradelist.add(new Grade("A", 84, 75, 4.0));
@@ -22,8 +22,15 @@ public class HomeViewController {
         gradelist.add(new Grade("D",39 , 35, 1));
         gradelist.add(new Grade("F", 34, 0, 0));
 
-
-//        GradeDataAccess.addGrades(gradelist);
+        try {
+            if(!GradeDataAccess.doGradesExist()){
+                for (Grade grade : gradelist) {
+                    GradeDataAccess.addGrades(grade);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

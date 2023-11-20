@@ -28,25 +28,15 @@ public class GradeDataAccess {
 //        this.GRADE_LIST = gradeList;
 //    }
 
-//    public static void addGrades( Grade grade) throws SQLException {
-
-//            STM_ADD_GRADES.setString(1,grade.getGradeLetter());
-//            STM_ADD_GRADES.setInt(2,grade.getUpperMark());
-//            STM_ADD_GRADES.setInt(3,grade.getLowerMark());
-//            STM_ADD_GRADES.setDouble(4,grade.getPoints());
-//            STM_ADD_GRADES.executeUpdate();
-
-//    }
-//    public static List<Grade> getAllGrades( Grade grade) throws SQLException {
-//
-//        ResultSet rst = STM_GET_ALL_GRADES.executeQuery();
-//        while (rst.next()){
-//            String gradeLetter = rst.getString("grade_letter");
-//
-//        }
-//        return  null;
-//
-//    }
-
-
+    public static void addGrades( Grade grade) throws SQLException {
+            STM_ADD_GRADES.setString(1,grade.getGradeLetter());
+            STM_ADD_GRADES.setInt(2,grade.getUpperMark());
+            STM_ADD_GRADES.setInt(3,grade.getLowerMark());
+            STM_ADD_GRADES.setDouble(4,grade.getPoints());
+            STM_ADD_GRADES.executeUpdate();
+    }
+    public static boolean doGradesExist() throws SQLException {
+        ResultSet rst = STM_GET_ALL_GRADES.executeQuery();
+        return rst.next();
+    }
 }
