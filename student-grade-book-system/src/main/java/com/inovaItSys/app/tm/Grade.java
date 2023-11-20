@@ -11,18 +11,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Grade implements Serializable {
-    private String letter;
+    private String gradeLetter;
     private int upperMark;
     private int lowerMark;
+    private double points;
 }
-//enum GradesList {
-//    A_PLUS(100,80),A(79,75),A_MIN(74,65);
-//
-//
-//    GradesList(int upperMark, int lowerMark){
-//        this.lowerMark=lowerMark;
-//        this.upperMark=upperMark;
-//    }
-//
-//
-//}
+

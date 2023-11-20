@@ -8,9 +8,10 @@ CREATE TABLE IF NOT EXISTS subject
 
 CREATE TABLE IF NOT EXISTS grade
 (
-    grade      VARCHAR(5) PRIMARY KEY,
+    grade_letter      VARCHAR(5) PRIMARY KEY,
     upper_mark INT NOT NULL,
-    lower_mark INT NOT NULL
+    lower_mark INT NOT NULL,
+    points DECIMAL(3,2) NOT NULL
 );
 
 CREATE TABLE student

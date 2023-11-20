@@ -20,10 +20,10 @@ public class StudentDataAccess {
             Connection connection = SingleDatabaseConnection.getInstance().getConnection();
             STM_STUDENT_INSERT = connection.prepareStatement("INSERT INTO student(id, first_name, last_name) VALUES (?,?,?)");
             STM_ENROLL_SUBJECT_INSERT = connection.prepareStatement("INSERT INTO subject_enroll(student_id, subject_code) VALUES (?,?)");
-            STM_GET_ALL_STUDENT = connection.prepareStatement("SELECT * FROM student ORDER BY id ");
+            STM_GET_ALL_STUDENT = connection.prepareStatement("SELECT * FROM student");
             STM_GET_ENROLL_SUBJECTS = connection.prepareStatement("SELECT code,subject_name,gpa FROM\n" +
                     "                                 (SELECT * FROM subject INNER JOIN subject_enroll ON code = subject_code) as es \n" +
-                    "                             WHERE student_id='1';\n");
+                    "                             WHERE student_id=?;\n");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
