@@ -1,7 +1,6 @@
 package com.inovaItSys.app.db;
 
 import com.inovaItSys.app.tm.Subject;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +19,6 @@ public class SubjectDataAccess {
                     .prepareStatement("INSERT INTO subject (code, subject_name, gpa) VALUES (?, ?, ?)");
             STM_SUBJECT_DELETE = connection.prepareStatement("DELETE FROM subject WHERE code=?");
             STM_GET_ALL_SUBJECTS = connection.prepareStatement("SELECT * FROM subject ORDER BY code");
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

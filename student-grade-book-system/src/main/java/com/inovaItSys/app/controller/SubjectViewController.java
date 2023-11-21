@@ -50,23 +50,22 @@ public class SubjectViewController   {
 
     public void SaveKeyPressedOnAction(KeyEvent keyEvent) {
         //Todo
-
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (!isDataValid()) return;
 
-        Subject subject = new Subject(txtCode.getText(),
-                txtSubjectName.getText().strip(), Double.valueOf(txtGpa.getText().strip()));
         try {
-                SubjectDataAccess.addNewSubject(subject);
-                tblSubject.getItems().add(subject);
-                btnNewSubject.fire();
+            Subject subject = new Subject(txtCode.getText(),
+                txtSubjectName.getText().strip(), Double.valueOf(txtGpa.getText().strip()));
+            SubjectDataAccess.addNewSubject(subject);
+            tblSubject.getItems().add(subject);
+            btnNewSubject.fire();
 
-            } catch (SQLException ex) {
-                new Alert(Alert.AlertType.ERROR, "Failed to save the subject, try again").show();
-                ex.printStackTrace();
-            }
+        } catch (SQLException ex) {
+            new Alert(Alert.AlertType.ERROR, "Failed to save the subject, try again").show();
+            ex.printStackTrace();
+        }
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
@@ -88,11 +87,11 @@ public class SubjectViewController   {
         String subjectName = txtSubjectName.getText().strip();
         String gpa = txtGpa.getText().strip();
 
-        if (!code.matches("SC\\d{4}")) {
+        if (!code.matches("^SC\\d{4}$")) {
             txtCode.requestFocus();
             txtCode.selectAll();
             return false;
-        }else if (!subjectName.matches("[A-Za-z ]{2,}")) {
+        }else if (!subjectName.matches("^[A-Za-z ]{2,}$")) {
             txtSubjectName.requestFocus();
             txtSubjectName.selectAll();
             return false;
@@ -103,6 +102,4 @@ public class SubjectViewController   {
         }
         return true;
     }
-
-
 }

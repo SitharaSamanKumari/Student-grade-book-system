@@ -24,7 +24,7 @@ public class SingleDatabaseConnection {
             String password = properties.getProperty("app.datasource.password");
             String url = properties.getProperty("app.datasource.url");
             connection = DriverManager.getConnection(url, username, password);
-//            generateSchema();
+            generateSchema();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

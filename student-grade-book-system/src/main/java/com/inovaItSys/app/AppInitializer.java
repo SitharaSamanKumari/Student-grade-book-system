@@ -21,18 +21,17 @@ public class AppInitializer extends Application {
         try(Connection connection = SingleDatabaseConnection.getInstance().getConnection();){
             launch(args);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException, SQLException {
-        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/ResultView.fxml"));
+        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/HomeView.fxml"));
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Student GradeBook");
         primaryStage.centerOnScreen();
         primaryStage.show();
-
     }
 }

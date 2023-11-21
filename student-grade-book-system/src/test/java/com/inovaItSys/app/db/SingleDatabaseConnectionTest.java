@@ -28,7 +28,7 @@ class SingleDatabaseConnectionTest {
     void generateSchema() {
         assertDoesNotThrow(()->{
             SingleDatabaseConnection.getInstance().getConnection().createStatement()
-                    .executeQuery("SELECT * FROM subject,  grade") ;
+                    .executeQuery("SELECT * FROM subject") ;
         });
     }
 }

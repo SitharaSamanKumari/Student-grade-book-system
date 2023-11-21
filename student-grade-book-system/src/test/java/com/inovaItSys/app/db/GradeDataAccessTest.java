@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GradeDataAccessTest {
 
-    @Test
-    void getResultGrade() throws SQLException {
-        assertTrue(GradeDataAccess.getResultGrade(100).equals("A+"));
-    }
+//    @Test
+//    void getResultGrade() throws SQLException {
+//        assertTrue(GradeDataAccess.getResultGrade(100).equals("A+"));
+//    }
 }

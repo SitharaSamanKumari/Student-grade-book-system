@@ -15,5 +15,10 @@ public class Grade implements Serializable {
     private int upperMark;
     private int lowerMark;
     private double points;
+    @Override
+    public String toString() {
+        return gradeLetter;
+    }
+
 }
 

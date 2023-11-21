@@ -1,41 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="535.0" prefWidth="484.0" AnchorPane.topAnchor="30.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inovaItSys.app.controller.HomeViewController">
+<AnchorPane fx:id="root" prefHeight="581.0" prefWidth="484.0" AnchorPane.topAnchor="30.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inovaItSys.app.controller.HomeViewController">
    <children>
-      <Label alignment="CENTER" layoutX="129.0" prefHeight="70.0" prefWidth="527.0" style="-fx-background-color: lightgreen;" text="STUDENT GRADEBOOK" textFill="#387244" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label alignment="CENTER" layoutX="129.0" prefHeight="81.0" prefWidth="484.0" style="-fx-background-color: lightgreen;" text="STUDENT GRADEBOOK" textFill="#387244" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Ubuntu Condensed" size="38.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutY="511.0" prefHeight="26.0" prefWidth="527.0" text="Copyright 2023 AMSSK. All Right Reserved." AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Label alignment="CENTER" layoutY="548.0" prefHeight="26.0" prefWidth="527.0" text="Copyright 2023 AMSSK. All Right Reserved." AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="182.0" layoutY="107.0" prefHeight="200.0" prefWidth="100.0" spacing="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="112.0" layoutY="103.0" prefHeight="436.0" prefWidth="232.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="140.0">
          <children>
-            <ImageView fx:id="imvAddStudent" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/add-student.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imvAddSubject" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/folder_full_add_12974.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imvTranscript" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Generate-transcript.png" />
-               </image>
-            </ImageView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imvAddSubject" fitHeight="149.0" fitWidth="76.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/folder_full_add_12974.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label fx:id="lblAddSubject" text="ADD SUBJECT">
+                     <font>
+                        <Font name="Ubuntu Condensed" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imvAddStudent" fitHeight="123.0" fitWidth="75.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/add-student.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label fx:id="lblAddStudent" text="ADD STUDENT">
+                     <font>
+                        <Font name="Ubuntu Condensed" size="21.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imvTranscript" fitHeight="95.0" fitWidth="76.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Generate-transcript.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label fx:id="lblTranscript" text="TRANSCRIPT">
+                     <font>
+                        <Font name="Ubuntu Condensed" size="21.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imvRemove" fitHeight="88.0" fitWidth="81.0" onMouseClicked="#navigate" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/remove.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label fx:id="lblRemoveStudent" text="REMOVE STUDENT">
+                     <font>
+                        <Font name="Ubuntu Condensed" size="21.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

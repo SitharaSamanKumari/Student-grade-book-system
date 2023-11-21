@@ -12,6 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Result implements Serializable {
+
     private String code;
     private String subjectName;
     private double gpa;

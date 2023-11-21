@@ -22,8 +22,8 @@ public class StudentDataAccess {
             STM_ENROLL_SUBJECT_INSERT = connection.prepareStatement("INSERT INTO subject_enroll(student_id, subject_code) VALUES (?,?)");
             STM_GET_ALL_STUDENT = connection.prepareStatement("SELECT * FROM student");
             STM_GET_ENROLL_SUBJECTS = connection.prepareStatement("SELECT code,subject_name,gpa FROM\n" +
-                    "                                 (SELECT * FROM subject INNER JOIN subject_enroll ON code = subject_code) as es \n" +
-                    "                             WHERE student_id=?;\n");
+                                    " (SELECT * FROM subject INNER JOIN subject_enroll ON code = subject_code) as es \n" +
+                                    " WHERE student_id=?;\n");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -44,8 +44,6 @@ public class StudentDataAccess {
                 STM_ENROLL_SUBJECT_INSERT.setString(2,subject.getCode());
                 STM_ENROLL_SUBJECT_INSERT.executeUpdate();
             }
-
-
             SingleDatabaseConnection.getInstance().getConnection().commit();
         }catch (Exception e){
             SingleDatabaseConnection.getInstance().getConnection().rollback();
@@ -78,8 +76,7 @@ public class StudentDataAccess {
             String lastName = rst.getString("last_name");
             studentList.add(new Student(id,firstName,lastName));
         }
-    return studentList;
+        return studentList;
     }
-
-    }
+}
 

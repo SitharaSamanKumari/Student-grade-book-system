@@ -8,8 +8,10 @@ import javafx.scene.control.*;
 import com.inovaItSys.app.tm.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ResultViewController   {
 
@@ -18,6 +20,10 @@ public class ResultViewController   {
     public TableView<Result> tblResult;
     public Button btnTranscript;
     public ComboBox<Student> cmbId;
+    public Label lblOverallGpa;
+
+    private double cgpa = 0;
+//    private double totalPoints = 0;
 
     public void initialize(){
         txtName.setDisable(true);
@@ -42,6 +48,10 @@ public class ResultViewController   {
 
         try {
             Student selectedStudent = cmbId.getSelectionModel().getSelectedItem();
+            tblResult.getItems().clear();
+            lblOverallGpa.setText("");
+//            this.gpa = 0;
+//            lblOverallGpa.setText(String.valueOf(gpa));
             txtName.setText(selectedStudent.getFirstName()+" " + selectedStudent.getLastName());
             ObservableList<Result> table = tblResult.getItems();
             List<Subject> enrolledSubjectList = StudentDataAccess.getEnrolledSubjects(selectedStudent.getId());
@@ -52,7 +62,20 @@ public class ResultViewController   {
                 table.add(result);
                 mark.textProperty().addListener((e)->{
                     try {
-                        displayGrade.setText(markValidation(mark.getText().strip()));
+                        String subjectMark = mark.getText().strip();
+                        if(subjectMark.isBlank()
+                                || !subjectMark.matches("^\\d{1,3}([.]\\d{1,2})?$")
+                                ||(Double.valueOf(subjectMark)>100.0)){
+                            displayGrade.setText("-");
+                        }else{
+                            Grade resultGrade = GradeDataAccess.getResultGrade(Double.valueOf(subjectMark));
+                            displayGrade.setText(resultGrade.getGradeLetter());
+                            double points = resultGrade.getPoints();
+                            double gpa = result.getGpa();
+                            double total = points*gpa;
+                            cgpa+=total;
+                            lblOverallGpa.setText(String.valueOf(cgpa));
+                        }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -61,12 +84,25 @@ public class ResultViewController   {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        try {
+            lblOverallGpa.setText(String.valueOf(getGpa()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public String markValidation(String mark) throws SQLException {
-        if(mark.strip().isBlank() || !mark.strip().matches("^\\d{1,3}([.]\\d{1,2})?$") ||(Double.valueOf(mark)>100.0)){
-            return "Invalid result!";
+
+    public double getGpa() throws SQLException {
+        double totalCredit = 0;
+        double multi = 0;
+        ObservableList<Result> results = tblResult.getItems();
+        for (Result result : results) {
+            double multipy = result.getGpa()*GradeDataAccess.getGradePoint(result.getGrade().getText().strip());
+            multi+=multipy;
+            totalCredit+=result.getGpa();
         }
-        return GradeDataAccess.getResultGrade(Double.valueOf(mark));
+        return (multi/totalCredit);
     }
+
+
 }

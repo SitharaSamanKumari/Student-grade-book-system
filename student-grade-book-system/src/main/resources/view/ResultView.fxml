@@ -34,7 +34,7 @@
          </font></Label>
       <ComboBox fx:id="cmbId" layoutX="33.0" layoutY="176.0" onAction="#cmbIdOnAction" prefWidth="150.0" />
       <Label layoutX="223.0" layoutY="152.0" text="Name:" />
-      <Label layoutX="185.0" layoutY="438.0" text="Overall GPA: 4.00" />
+      <Label fx:id="lblOverallGpa" layoutX="185.0" layoutY="438.0" text="Overall GPA: 4.00" />
       <Button fx:id="btnBack" layoutX="358.0" layoutY="487.0" mnemonicParsing="false" text="&lt;&lt;Back" />
       <Label layoutX="223.0" layoutY="176.0" prefHeight="24.0" prefWidth="196.0" />
       <TextField fx:id="txtName" layoutX="215.0" layoutY="176.0" prefHeight="24.0" prefWidth="244.0" />
