@@ -7,10 +7,18 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import com.inovaItSys.app.tm.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ResultViewController   {
 
@@ -95,7 +103,6 @@ public class ResultViewController   {
     public double getGpa() throws SQLException {
         double totalCredit = 0;
         double totalSubjectCredit = 0;
-        double cgpa = 0;
         ObservableList<Result> results = tblResult.getItems();
         for (Result result : results) {
             double subjectCredit = result.getGpa() * GradeDataAccess.getGradePoint(result.getGrade().getText().strip());
@@ -113,6 +120,56 @@ public class ResultViewController   {
     }
 
     public void btnTranscriptOnAction(ActionEvent actionEvent) {
+        double totalCredit = 0;
+        ObservableList<Result> results = tblResult.getItems();
+        for (Result result : results) {
+            totalCredit+=result.getGpa();
+        }
+
+        List<JasperResult> resultList = new ArrayList<>();
+        ObservableList<Result> table = tblResult.getItems();
+        for (Result result : table) {
+            resultList.add(new JasperResult(result.getCode(),result.getSubjectName(),result.getGrade().getText(),String.valueOf(result.getGpa())));
+        }
+
+        printTranscript(totalCredit,resultList);
+    }
+    private void printTranscript(double totalCredit, List<JasperResult> resultList ){
+
+        try {
+            JasperDesign jasperDesign = JRXmlLoader
+                    .load(getClass().getResourceAsStream("/report/transcript.jrxml"));
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+
+            Map<String, Object> reportParams = new HashMap<>();
+            reportParams.put("id",cmbId.getSelectionModel().getSelectedItem().getId());
+            reportParams.put("name", txtName.getText());
+            reportParams.put("cgpa", lblOverallGpa.getText().replace("CGPA:","").strip());
+            reportParams.put("totalcredits", totalCredit);
+
+//            HashMap<String, Object> reportVariables = new HashMap<>();
+//            ObservableList<Result> items = tblResult.getItems();
+//            for (Result item : items) {
+//                reportVariables.put("code", item.getCode());
+//                reportVariables.put("subjectName", item.getSubjectName());
+//                reportVariables.put("grade", item.getGrade().getText());
+//                reportVariables.put("gpa", item.getGpa());
+//            }
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportParams, new JRBeanCollectionDataSource(resultList));
+
+            JasperViewer.viewReport(jasperPrint, false);
+            // JasperPrintManager.printReport(jasperPrint, false);
+        } catch (JRException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to print the bill").show();
+        }
+
+
+
 
     }
 }
