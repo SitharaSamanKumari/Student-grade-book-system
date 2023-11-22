@@ -11,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,12 @@ public class StudentViewController   {
     public Button btnSave;
     public Button btnDelete;
     public Button btnNewStudent;
+    public Button btnBackArrow;
 
     public void initialize(){
+        for (TextField textField : new TextField[]{txtID, txtFirstName, txtLastName}){
+            textField.setDisable(true);
+        }
         ObservableList<Subject> subjects = lvSubjects.getItems();
         try{
             subjects.addAll(SubjectDataAccess.getAllSubjects());
@@ -38,6 +44,7 @@ public class StudentViewController   {
             new Alert(Alert.AlertType.ERROR,"Fail to load subjects").show();
             e.printStackTrace();
         }
+
     }
     public void txtSearchSubjectOnAction(ActionEvent actionEvent) {
     }
@@ -51,27 +58,23 @@ public class StudentViewController   {
         selectedSubjectList.add(selectedItem);
     }
 
-    public void btnBackOnAction(ActionEvent actionEvent) {
-        ObservableList<Subject> subjectList = lvSubjects.getItems();
-        ObservableList<Subject> selectedSubjectList = lvSelectedSubjects.getItems();
-
-        Subject selectedItem = lvSelectedSubjects.getSelectionModel().getSelectedItem();
-        subjectList.add(selectedItem);
-        selectedSubjectList.remove(selectedItem);
-
+    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
+        HomeViewController.navigateToHome(btnBack);
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
-    }
+
 
     public void btnNewStudentOnAction(ActionEvent actionEvent) {
-        for (TextField textField : new TextField[]{txtFirstName, txtLastName, txtID,txtSearchSubject})
+        for (TextField textField : new TextField[]{txtFirstName, txtLastName, txtID}){
+            textField.setDisable(false);
             textField.clear();
+        }
         lvSubjects.getSelectionModel().clearSelection();
-        lvSelectedSubjects.getItems().removeAll();
         txtID.requestFocus();
     }
     public void btnRemoveOnAction(ActionEvent actionEvent) {
+
+        //Todo
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
@@ -84,9 +87,17 @@ public class StudentViewController   {
             subjectList.add(subject);
         }
         try {
+            List<Student> allStudent = StudentDataAccess.getAllStudent();
+            for (Student student : allStudent) {
+                if(student.getId().equals(id)){
+                    new Alert(Alert.AlertType.ERROR,"Student ID already exist!").show();
+                    return;
+                }
+            }
             StudentDataAccess.addNewStudent(new Student(id,firstName,lastName), subjectList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.CONFIRMATION,"Saved successfully!").show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -96,7 +107,7 @@ public class StudentViewController   {
         String firstName = txtFirstName.getText().strip();
         String lastName = txtLastName.getText().strip();
 
-        if (!id.matches("S\\d{2}")) {
+        if (!id.matches("S\\d{3}")) {
             txtID.requestFocus();
             txtID.selectAll();
             return false;
@@ -113,4 +124,13 @@ public class StudentViewController   {
     }
 
 
+    public void btnBackOnActionArrow(ActionEvent actionEvent) {
+        ObservableList<Subject> subjectList = lvSubjects.getItems();
+        ObservableList<Subject> selectedSubjectList = lvSelectedSubjects.getItems();
+
+        Subject selectedItem = lvSelectedSubjects.getSelectionModel().getSelectedItem();
+        subjectList.add(selectedItem);
+        selectedSubjectList.remove(selectedItem);
+
+    }
 }

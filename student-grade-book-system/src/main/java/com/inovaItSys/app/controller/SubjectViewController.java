@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class SubjectViewController   {
@@ -23,9 +24,15 @@ public class SubjectViewController   {
     public TableView<Subject> tblSubject;
     public Button btnBack;
     public void initialize() {
+        for (TextField textField : new TextField[]{txtGpa, txtSubjectName, txtCode}){
+            textField.setDisable(true);
+        }
+
+
         tblSubject.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
         tblSubject.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
         tblSubject.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("gpa"));
+
 
         tblSubject.setEditable(false);
         btnSave.setDefaultButton(true);
@@ -41,16 +48,12 @@ public class SubjectViewController   {
                 txtSubjectName.setText(cur.getSubjectName());
                 txtGpa.setText(String.format("%s",cur.getGpa()));
             }else{
-                btnSave.setText("SAVE");
                 btnDelete.setDisable(true);
             }
         });
         Platform.runLater(txtCode::requestFocus);
     }
 
-    public void SaveKeyPressedOnAction(KeyEvent keyEvent) {
-        //Todo
-    }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (!isDataValid()) return;
@@ -73,21 +76,23 @@ public class SubjectViewController   {
     }
 
     public void btnNewSubjectOnAction(ActionEvent actionEvent) {
-        for (TextField textField : new TextField[]{txtGpa, txtSubjectName, txtCode})
+        for (TextField textField : new TextField[]{txtGpa, txtSubjectName, txtCode}){
+            textField.setDisable(false);
             textField.clear();
+        }
         tblSubject.getSelectionModel().clearSelection();
         txtCode.requestFocus();
     }
 
-    public void btnBackOnAction(ActionEvent actionEvent) {
-        //Todo
+    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
+        HomeViewController.navigateToHome(btnBack);
     }
     private boolean isDataValid() {
         String code = txtCode.getText().strip();
         String subjectName = txtSubjectName.getText().strip();
         String gpa = txtGpa.getText().strip();
 
-        if (!code.matches("^SC\\d{4}$")) {
+        if (!code.matches("^([a-zA-Z1-9]{1,})$")) {
             txtCode.requestFocus();
             txtCode.selectAll();
             return false;
@@ -95,7 +100,7 @@ public class SubjectViewController   {
             txtSubjectName.requestFocus();
             txtSubjectName.selectAll();
             return false;
-        }else if (!gpa.matches("[1-5][.][0-9]{1,2}")){
+        }else if (!gpa.matches("^[1-5]([.][0-9]{1,2})?$")){
             txtGpa.requestFocus();
             txtGpa.selectAll();
             return false;

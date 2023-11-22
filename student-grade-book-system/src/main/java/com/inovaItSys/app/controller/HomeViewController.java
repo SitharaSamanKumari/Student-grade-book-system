@@ -1,5 +1,6 @@
 package com.inovaItSys.app.controller;
 
+import com.inovaItSys.app.AppInitializer;
 import com.inovaItSys.app.db.GradeDataAccess;
 import com.inovaItSys.app.tm.Grade;
 import javafx.animation.FadeTransition;
@@ -9,6 +10,7 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -40,10 +42,7 @@ public class HomeViewController {
 
 
     public void initialize(){
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), root);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
-        fadeIn.play();
+
         List<Grade> gradelist = new ArrayList<>(){};
         gradelist.add(new Grade("A+", 100, 85, 4.2));
         gradelist.add(new Grade("A", 84, 75, 4.0));
@@ -99,12 +98,23 @@ public class HomeViewController {
                 primaryStage.setScene(subScene);
                 primaryStage.sizeToScene();
                 primaryStage.centerOnScreen();
-                TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
-                tt.setFromX(-subScene.getWidth());
-                tt.setToX(0);
-                tt.play();
+//                TranslateTransition tt = new TranslateTransition(Duration.millis(10), subScene.getRoot());
+//                tt.setFromX(-subScene.getWidth());
+//                tt.setToX(0);
+//                tt.play();
                 Platform.runLater(()-> primaryStage.setResizable(false));
             }
         }
+    }
+    public static void navigateToHome(Node rootNode) throws IOException {
+        Parent root = FXMLLoader.load(AppInitializer.class.getResource("/view/HomeView.fxml"));
+        Scene scene = new Scene(root);
+        Stage primaryStage = (Stage) (rootNode.getScene().getWindow());
+        primaryStage.setResizable(true);
+        primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
+        primaryStage.centerOnScreen();
+        primaryStage.setOnCloseRequest(null);
+//        Platform.runLater(()-> primaryStage.setResizable(false));
     }
 }

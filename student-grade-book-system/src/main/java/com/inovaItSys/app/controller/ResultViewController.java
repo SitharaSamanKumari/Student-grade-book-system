@@ -8,10 +8,9 @@ import javafx.scene.control.*;
 import com.inovaItSys.app.tm.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.math.BigDecimal;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class ResultViewController   {
 
@@ -22,10 +21,12 @@ public class ResultViewController   {
     public ComboBox<Student> cmbId;
     public Label lblOverallGpa;
 
-    private double cgpa = 0;
+//    private double cgpa = 0;
 //    private double totalPoints = 0;
 
     public void initialize(){
+        lblOverallGpa.setText("CGPA: ");
+
         txtName.setDisable(true);
         String[] columns = {"code","subjectName","gpa","marks","grade"};
         /*Result table mapping*/
@@ -45,11 +46,9 @@ public class ResultViewController   {
 
     }
     public void cmbIdOnAction(ActionEvent actionEvent) {
-
         try {
             Student selectedStudent = cmbId.getSelectionModel().getSelectedItem();
             tblResult.getItems().clear();
-            lblOverallGpa.setText("");
 //            this.gpa = 0;
 //            lblOverallGpa.setText(String.valueOf(gpa));
             txtName.setText(selectedStudent.getFirstName()+" " + selectedStudent.getLastName());
@@ -70,11 +69,12 @@ public class ResultViewController   {
                         }else{
                             Grade resultGrade = GradeDataAccess.getResultGrade(Double.valueOf(subjectMark));
                             displayGrade.setText(resultGrade.getGradeLetter());
-                            double points = resultGrade.getPoints();
-                            double gpa = result.getGpa();
-                            double total = points*gpa;
-                            cgpa+=total;
-                            lblOverallGpa.setText(String.valueOf(cgpa));
+                            double cgpa = getGpa();
+//                            double points = resultGrade.getPoints();
+//                            double gpa = result.getGpa();
+//                            double total = points*gpa;
+//                            cgpa+=total;
+                            lblOverallGpa.setText(String.format("CGPA: %.2f",cgpa));
                         }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
@@ -94,15 +94,25 @@ public class ResultViewController   {
 
     public double getGpa() throws SQLException {
         double totalCredit = 0;
-        double multi = 0;
+        double totalSubjectCredit = 0;
+        double cgpa = 0;
         ObservableList<Result> results = tblResult.getItems();
         for (Result result : results) {
-            double multipy = result.getGpa()*GradeDataAccess.getGradePoint(result.getGrade().getText().strip());
-            multi+=multipy;
-            totalCredit+=result.getGpa();
+            double subjectCredit = result.getGpa() * GradeDataAccess.getGradePoint(result.getGrade().getText().strip());
+            if(result.getMarks().getText()!=null){
+                totalSubjectCredit+=subjectCredit;
+                totalCredit+=result.getGpa();
+            }
         }
-        return (multi/totalCredit);
+        return (totalSubjectCredit/totalCredit);
     }
 
 
+    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
+        HomeViewController.navigateToHome(btnBack);
+    }
+
+    public void btnTranscriptOnAction(ActionEvent actionEvent) {
+
+    }
 }
