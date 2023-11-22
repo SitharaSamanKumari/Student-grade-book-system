@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.inovaItSys.app.controller.RemoveStudentViewController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="636.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inovaItSys.app.controller.RemoveStudentViewController">
+   <children>
+      <Label alignment="CENTER" prefHeight="70.0" prefWidth="494.0" style="-fx-background-color: lightgreen;" text="STUDENT GRADEBOOK" textFill="#387244" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="Ubuntu Condensed" size="38.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="7.0" layoutY="70.0" prefHeight="38.0" prefWidth="647.0" style="-fx-background-color: lightblue;" text="DELETE STUDENT" textFill="#394644" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="Ubuntu Condensed" size="21.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblStudentData" layoutX="46.0" layoutY="183.0" prefHeight="392.0" prefWidth="556.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="183.0">
+        <columns>
+          <TableColumn prefWidth="148.0" text="ID" />
+          <TableColumn minWidth="0.0" prefWidth="192.0" text="FIRST NAME" />
+            <TableColumn prefWidth="215.0" text="LAST NAME" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnDelete" layoutX="46.0" layoutY="589.0" mnemonicParsing="false" onAction="#btnDeleteStudentOnAction" prefHeight="24.0" prefWidth="94.0" text="DELETE" />
+      <Button fx:id="btnBack" layoutX="508.0" layoutY="589.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="24.0" prefWidth="94.0" text="&lt;&lt;BACK" />
+      <TextField fx:id="txtSearch" layoutX="46.0" layoutY="142.0" prefHeight="24.0" prefWidth="501.0" />
+      <Label layoutX="46.0" layoutY="118.0" text="Enter something to search here" />
+   </children>
 </AnchorPane>

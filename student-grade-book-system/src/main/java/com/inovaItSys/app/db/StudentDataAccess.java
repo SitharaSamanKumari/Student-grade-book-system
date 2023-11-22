@@ -15,6 +15,9 @@ public class StudentDataAccess {
     private static final PreparedStatement STM_ENROLL_SUBJECT_INSERT;
     private static final PreparedStatement STM_GET_ALL_STUDENT;
     private static final PreparedStatement STM_GET_ENROLL_SUBJECTS;
+    private static final PreparedStatement STM_FIND_STUDENT;
+    private static final PreparedStatement STM_DELETE_FROM_STUDENT;
+    private static final PreparedStatement STM_DELETE_FROM_SE;
     static {
         try {
             Connection connection = SingleDatabaseConnection.getInstance().getConnection();
@@ -24,6 +27,11 @@ public class StudentDataAccess {
             STM_GET_ENROLL_SUBJECTS = connection.prepareStatement("SELECT code,subject_name,gpa FROM\n" +
                                     " (SELECT * FROM subject INNER JOIN subject_enroll ON code = subject_code) as es \n" +
                                     " WHERE student_id=?;\n");
+
+            STM_FIND_STUDENT=connection.prepareStatement("SELECT * FROM student WHERE id LIKE ? OR first_name LIKE ? OR last_name LIKE ?");
+            STM_DELETE_FROM_STUDENT = connection.prepareStatement("DELETE FROM student WHERE id=?");
+            STM_DELETE_FROM_SE = connection.prepareStatement("DELETE FROM subject_enroll WHERE student_id=?");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -78,5 +86,39 @@ public class StudentDataAccess {
         }
         return studentList;
     }
+
+    public static List<Student> findStudents(String keyWord) throws SQLException {
+        ArrayList<Student> studentList = new ArrayList<>();
+        for (int i = 1; i < 4; i++) {
+            STM_FIND_STUDENT.setString(i, "%"+keyWord+"%");
+        }
+        ResultSet rst = STM_FIND_STUDENT.executeQuery();
+        while (rst.next()){
+            String id = rst.getString("id");
+            String firstName = rst.getString("first_name");
+            String lastName = rst.getString("last_name");
+            studentList.add(new Student(id,firstName,lastName));
+        }
+        return studentList;
+    }
+
+    public static void deleteStudent(String id) throws SQLException {
+        SingleDatabaseConnection.getInstance().getConnection().setAutoCommit(false);
+        try {
+            STM_DELETE_FROM_STUDENT.setString(1,id);
+            STM_DELETE_FROM_STUDENT.executeUpdate();
+            STM_DELETE_FROM_SE.setString(1,id);
+            STM_DELETE_FROM_SE.executeUpdate();
+            SingleDatabaseConnection.getInstance().getConnection().commit();
+
+
+        }catch (Exception e){
+            SingleDatabaseConnection.getInstance().getConnection().rollback();
+        }finally {
+            SingleDatabaseConnection.getInstance().getConnection().setAutoCommit(true);
+        }
+    }
+
+
 }
 

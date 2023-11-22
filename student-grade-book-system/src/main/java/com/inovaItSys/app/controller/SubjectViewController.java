@@ -3,6 +3,7 @@ package com.inovaItSys.app.controller;
 import com.inovaItSys.app.db.SubjectDataAccess;
 import com.inovaItSys.app.tm.Subject;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -72,7 +73,20 @@ public class SubjectViewController   {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        //Todo
+        Subject selectedSubject = tblSubject.getSelectionModel().getSelectedItem();
+
+        try{
+           if(SubjectDataAccess.isEnrolledSubject(selectedSubject.getCode())){
+               new Alert(Alert.AlertType.ERROR,"Some students has enrolled this subject.").show();
+           }else{
+               SubjectDataAccess.deleteSubject(selectedSubject.getCode());
+               tblSubject.getItems().remove(selectedSubject);
+               if(tblSubject.getItems().isEmpty()) btnNewSubject.fire();
+           }
+       } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void btnNewSubjectOnAction(ActionEvent actionEvent) {

@@ -12,6 +12,7 @@ public class SubjectDataAccess {
     private static final PreparedStatement STM_SUBJECT_INSERT;
     private static final PreparedStatement STM_SUBJECT_DELETE;
     private static final PreparedStatement STM_GET_ALL_SUBJECTS;
+    private static final PreparedStatement STM_SUBJECT_ENROLLED;
     static {
         try {
             Connection connection = SingleDatabaseConnection.getInstance().getConnection();
@@ -19,6 +20,7 @@ public class SubjectDataAccess {
                     .prepareStatement("INSERT INTO subject (code, subject_name, gpa) VALUES (?, ?, ?)");
             STM_SUBJECT_DELETE = connection.prepareStatement("DELETE FROM subject WHERE code=?");
             STM_GET_ALL_SUBJECTS = connection.prepareStatement("SELECT * FROM subject ORDER BY code");
+            STM_SUBJECT_ENROLLED = connection.prepareStatement("SELECT * FROM subject_enroll WHERE subject_code=?");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -45,5 +47,10 @@ public class SubjectDataAccess {
             SubjectList.add(new Subject(code, name, gpa));
         }
         return SubjectList;
+    }
+
+    public static boolean isEnrolledSubject(String code) throws SQLException {
+        STM_SUBJECT_ENROLLED.setString(1,code);
+        return STM_SUBJECT_ENROLLED.executeQuery().next();
     }
 }
