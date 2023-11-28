@@ -29,9 +29,6 @@ public class ResultViewController   {
     public ComboBox<Student> cmbId;
     public Label lblOverallGpa;
 
-//    private double cgpa = 0;
-//    private double totalPoints = 0;
-
     public void initialize(){
         lblOverallGpa.setText("CGPA: ");
 
@@ -57,11 +54,10 @@ public class ResultViewController   {
         try {
             Student selectedStudent = cmbId.getSelectionModel().getSelectedItem();
             tblResult.getItems().clear();
-//            this.gpa = 0;
-//            lblOverallGpa.setText(String.valueOf(gpa));
             txtName.setText(selectedStudent.getFirstName()+" " + selectedStudent.getLastName());
             ObservableList<Result> table = tblResult.getItems();
             List<Subject> enrolledSubjectList = StudentDataAccess.getEnrolledSubjects(selectedStudent.getId());
+
             for (Subject enrollSubject : enrolledSubjectList) {
                 TextField mark = new TextField();
                 Label displayGrade = new Label();
@@ -78,10 +74,6 @@ public class ResultViewController   {
                             Grade resultGrade = GradeDataAccess.getResultGrade(Double.valueOf(subjectMark));
                             displayGrade.setText(resultGrade.getGradeLetter());
                             double cgpa = getGpa();
-//                            double points = resultGrade.getPoints();
-//                            double gpa = result.getGpa();
-//                            double total = points*gpa;
-//                            cgpa+=total;
                             lblOverallGpa.setText(String.format("CGPA: %.2f",cgpa));
                         }
                     } catch (SQLException ex) {
@@ -126,19 +118,19 @@ public class ResultViewController   {
             totalCredit+=result.getGpa();
         }
 
-        List<JasperResult> resultList = new ArrayList<>();
+        List<PrintStudent> resultList = new ArrayList<>();
         ObservableList<Result> table = tblResult.getItems();
         for (Result result : table) {
-            resultList.add(new JasperResult(result.getCode(),result.getSubjectName(),result.getGrade().getText(),String.valueOf(result.getGpa())));
+            resultList.add(new PrintStudent(result.getCode(),result.getSubjectName(),result.getGrade().getText(),String.valueOf(result.getGpa())));
         }
 
         printTranscript(totalCredit,resultList);
     }
-    private void printTranscript(double totalCredit, List<JasperResult> resultList ){
+    private void printTranscript(double totalCredit, List<PrintStudent> resultList ){
 
         try {
             JasperDesign jasperDesign = JRXmlLoader
-                    .load(getClass().getResourceAsStream("/report/transcript.jrxml"));
+                    .load(getClass().getResourceAsStream("/print/transcript.jrxml"));
 
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
@@ -149,20 +141,9 @@ public class ResultViewController   {
             reportParams.put("cgpa", lblOverallGpa.getText().replace("CGPA:","").strip());
             reportParams.put("totalcredits", totalCredit);
 
-//            HashMap<String, Object> reportVariables = new HashMap<>();
-//            ObservableList<Result> items = tblResult.getItems();
-//            for (Result item : items) {
-//                reportVariables.put("code", item.getCode());
-//                reportVariables.put("subjectName", item.getSubjectName());
-//                reportVariables.put("grade", item.getGrade().getText());
-//                reportVariables.put("gpa", item.getGpa());
-//            }
-
-
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportParams, new JRBeanCollectionDataSource(resultList));
 
             JasperViewer.viewReport(jasperPrint, false);
-            // JasperPrintManager.printReport(jasperPrint, false);
         } catch (JRException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to print the bill").show();

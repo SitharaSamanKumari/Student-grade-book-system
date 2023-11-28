@@ -58,12 +58,7 @@
             <Font name="Ubuntu" size="23.0" />
          </font>
       </Button>
-      <Button fx:id="btnRemove" layoutX="465.0" layoutY="575.0" mnemonicParsing="false" onAction="#btnRemoveOnAction" prefHeight="24.0" prefWidth="106.0" text="Clear">
-         <font>
-            <Font name="Ubuntu" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnSave" layoutX="244.0" layoutY="679.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="15.0" prefWidth="79.0" text="ADD">
+      <Button fx:id="btnSave" layoutX="236.0" layoutY="653.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="15.0" prefWidth="79.0" text="ADD">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
@@ -85,7 +80,7 @@
             <Font name="Ubuntu Condensed" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btnBack" layoutX="360.0" layoutY="679.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="26.0" prefWidth="90.0" text="&lt;&lt;Back">
+      <Button fx:id="btnBack" layoutX="360.0" layoutY="653.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="26.0" prefWidth="90.0" text="&lt;&lt;Back">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>

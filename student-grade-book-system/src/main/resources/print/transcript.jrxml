@@ -38,42 +38,42 @@
 	<pageHeader>
 		<band height="86" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="130" height="19" uuid="0b2f70eb-8509-4404-a727-357248d52236"/>
+				<reportElement x="50" y="0" width="130" height="19" uuid="0b2f70eb-8509-4404-a727-357248d52236"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Ubuntu" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[FULL NAME]]></text>
+				<text><![CDATA[FULL NAME:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="30" width="130" height="19" uuid="456bee5d-f88e-463c-bd99-f6b7b3b439e2"/>
+				<reportElement x="50" y="30" width="130" height="19" uuid="456bee5d-f88e-463c-bd99-f6b7b3b439e2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Ubuntu" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REGISTRATION NO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="60" width="130" height="19" uuid="13dd90b4-c6c7-40c4-bcc3-483f8d737053"/>
+				<reportElement x="50" y="60" width="130" height="19" uuid="13dd90b4-c6c7-40c4-bcc3-483f8d737053"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Ubuntu" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[OVERALL GPA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="150" y="-1" width="335" height="20" uuid="16fb11fd-b0f7-42c7-a5dc-db9c0fd01218"/>
+				<reportElement x="200" y="-1" width="335" height="20" uuid="16fb11fd-b0f7-42c7-a5dc-db9c0fd01218"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="33" width="332" height="20" uuid="1deddfc6-36bd-4800-927f-92b7bc500e90"/>
+				<reportElement x="200" y="33" width="332" height="20" uuid="1deddfc6-36bd-4800-927f-92b7bc500e90"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="60" width="330" height="20" uuid="04df79c1-6f53-4121-bdbe-b4cbab09d334"/>
+				<reportElement x="200" y="60" width="330" height="20" uuid="04df79c1-6f53-4121-bdbe-b4cbab09d334"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -145,28 +145,28 @@
 		<band height="37" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="110" height="30" uuid="44f2962d-6716-4e99-8886-9419e99b2caa"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{subCode}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="2" width="260" height="30" uuid="0703d47f-d024-46ff-abe1-255ed8cf44ce"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{subName}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="2" width="80" height="30" uuid="ffd63f83-9f3c-4e4f-b352-d3b6b72f0216"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{gradeLetter}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="450" y="2" width="80" height="30" uuid="ad1b0794-7d61-42ec-ba0a-b82ae0cd6896"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{subGpa}]]></textFieldExpression>

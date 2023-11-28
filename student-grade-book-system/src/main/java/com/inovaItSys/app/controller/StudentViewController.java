@@ -46,8 +46,7 @@ public class StudentViewController   {
         }
 
     }
-    public void txtSearchSubjectOnAction(ActionEvent actionEvent) {
-    }
+
 
     public void btnNextOnAction(ActionEvent actionEvent) {
         ObservableList<Subject> subjectList = lvSubjects.getItems();
@@ -71,10 +70,6 @@ public class StudentViewController   {
         }
         lvSubjects.getSelectionModel().clearSelection();
         txtID.requestFocus();
-    }
-    public void btnRemoveOnAction(ActionEvent actionEvent) {
-
-        //Todo
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {

@@ -3,11 +3,7 @@ package com.inovaItSys.app.controller;
 import com.inovaItSys.app.AppInitializer;
 import com.inovaItSys.app.db.GradeDataAccess;
 import com.inovaItSys.app.tm.Grade;
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -65,9 +60,8 @@ public class HomeViewController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
     @FXML
     private void navigate(MouseEvent event) throws IOException {
 
@@ -98,10 +92,6 @@ public class HomeViewController {
                 primaryStage.setScene(subScene);
                 primaryStage.sizeToScene();
                 primaryStage.centerOnScreen();
-//                TranslateTransition tt = new TranslateTransition(Duration.millis(10), subScene.getRoot());
-//                tt.setFromX(-subScene.getWidth());
-//                tt.setToX(0);
-//                tt.play();
                 Platform.runLater(()-> primaryStage.setResizable(false));
             }
         }
@@ -115,6 +105,5 @@ public class HomeViewController {
         primaryStage.sizeToScene();
         primaryStage.centerOnScreen();
         primaryStage.setOnCloseRequest(null);
-//        Platform.runLater(()-> primaryStage.setResizable(false));
     }
 }

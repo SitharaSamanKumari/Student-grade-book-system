@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JasperResult {
+public class PrintStudent {
     private String subCode;
     private String subName;
     private String gradeLetter;

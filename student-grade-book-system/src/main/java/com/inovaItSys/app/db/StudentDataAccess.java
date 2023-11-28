@@ -107,11 +107,11 @@ public class StudentDataAccess {
         try {
             STM_DELETE_FROM_STUDENT.setString(1,id);
             STM_DELETE_FROM_STUDENT.executeUpdate();
+
             STM_DELETE_FROM_SE.setString(1,id);
             STM_DELETE_FROM_SE.executeUpdate();
+
             SingleDatabaseConnection.getInstance().getConnection().commit();
-
-
         }catch (Exception e){
             SingleDatabaseConnection.getInstance().getConnection().rollback();
         }finally {

@@ -47,15 +47,10 @@ public class RemoveStudentViewController {
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to delete student").show();
-
         }
-
-
     }
-
 
     public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
         HomeViewController.navigateToHome(btnBack);
     }
-
 }

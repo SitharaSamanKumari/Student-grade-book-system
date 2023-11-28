@@ -29,11 +29,9 @@ public class SubjectViewController   {
             textField.setDisable(true);
         }
 
-
         tblSubject.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
         tblSubject.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("subjectName"));
         tblSubject.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("gpa"));
-
 
         tblSubject.setEditable(false);
         btnSave.setDefaultButton(true);
@@ -86,7 +84,6 @@ public class SubjectViewController   {
        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void btnNewSubjectOnAction(ActionEvent actionEvent) {
